@@ -8,8 +8,7 @@ import { validationSchema } from "../schemas/productSchema";
 import SizeRadio from "./sizeRadio";
 import ColorRadio from "./colorRadio";
 import LocationForm from "./Location";
-import ProductSchema from "../lib/ProductSchema";
-import dbConnect from "../lib/dbConnect";
+
 
 function App() {
   const {

@@ -9,9 +9,14 @@ import { validationSchema } from "@/models/validationSchema";
 import SizeRadio from "@/components/sizeRadio";
 import ColorRadio from "@/components/colorRadio";
 import LocationForm from "@/components/Location";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Spinner, Alert } from "react-bootstrap";
 import axios from "axios";
+import UploadImage from "./uploadImage";
+
 const AddProductModal = ({ show, onHide }) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
+  const [imageUploadError, setImageUploadError] = useState(null);
   const {
     register,
     handleSubmit,
@@ -20,21 +25,29 @@ const AddProductModal = ({ show, onHide }) => {
     resolver: yupResolver(validationSchema),
   });
 
+  const handleImageUpload = (imageUrl) => {
+    register("image", { value: imageUrl });
+  };
   const onSubmit = async (data) => {
     console.log(data);
 
     try {
+      setSubmitting(true);
+
       const response = await axios.post("/api/product/new", data);
 
       if (response.status === 201) {
+        setIsSubmitSuccessful(true);
         console.log("Product added successfully");
-        isSubmitted = true;
+
         onHide();
       }
     } catch (error) {
       console.log("Error adding product");
-
-      console.log(error);
+      console.error(error);
+      setIsSubmitSuccessful(false);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -47,57 +60,59 @@ const AddProductModal = ({ show, onHide }) => {
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3  space-x-3 items-center flex">
-              <div>
-                <Form.Label className="fw-bold">Product Name:</Form.Label>
-                <Form.Control
-                  size="md"
-                  type="text"
-                  placeholder="product"
-                  {...register("product")}
-                  style={{ width: "200px" }} // Set the desired width here
-                />
-                <p className="text-xs text-red-400">
-                  {errors?.product?.message}
-                </p>
+              <div className="flex w-1/2">
+                <div>
+                  <Form.Label className="fw-bold">Product Name:</Form.Label>
+                  <Form.Control
+                    size="md"
+                    type="text"
+                    placeholder="product"
+                    {...register("product")}
+                    style={{ width: "200px" }} // Set the desired width here
+                  />
+                  <p className="text-xs text-red-400">
+                    {errors?.product?.message}
+                  </p>
+                </div>
+                <div>
+                  <Form.Label className="fw-bold">Quantity:</Form.Label>
+                  <Form.Control
+                    size="md"
+                    type="number"
+                    max={10}
+                    min={0}
+                    placeholder="quanity"
+                    {...register("quantity")}
+                    style={{ width: "100px" }} // Set the desired width here
+                  />
+                  <p className="text-xs text-red-400">
+                    {errors?.quantity?.message}
+                  </p>
+                </div>
+                <div>
+                  <Form.Label className="fw-bold">Price:</Form.Label>
+                  <Form.Control
+                    size="md"
+                    min={0}
+                    type="number"
+                    placeholder="price"
+                    {...register("price")}
+                    style={{ width: "100px" }}
+                  />
+                  <p className="text-xs text-red-400">
+                    {errors?.price?.message}
+                  </p>
+                </div>
               </div>
-              <div>
-                <Form.Label className="fw-bold">Quantity:</Form.Label>
-                <Form.Control
-                  size="md"
-                  type="number"
-                  max={10}
-                  min={0}
-                  placeholder="quanity"
-                  {...register("quantity")}
-                  style={{ width: "100px" }} // Set the desired width here
-                />
-                <p className="text-xs text-red-400">
-                  {errors?.quantity?.message}
-                </p>
-              </div>
-              <div>
-                <Form.Label className="fw-bold">Price:</Form.Label>
-                <Form.Control
-                  size="md"
-                  min={0}
-                  type="number"
-                  placeholder="price"
-                  {...register("price")}
-                  style={{ width: "100px" }}
-                />
-                <p className="text-xs text-red-400">{errors?.price?.message}</p>
-              </div>
-              <div className="flex flex-col items-start space-x-1">
-                <Form.Label className="px-3  fw-bold flex items-start">
-                  Product Image:
-                </Form.Label>
-                <Form.Control
-                  style={{ width: "200px" }}
-                  type="text"
-                  {...register("image")}
-                />
-                <p className="text-xs text-red-400">{errors?.image?.message}</p>
-              </div>
+            </div>
+            <div className="flex flex-col w-1/2 items-start space-x-1">
+              <Form.Label className="px-3  fw-bold flex items-start">
+                Product Image:
+              </Form.Label>
+              <UploadImage
+                register={register}
+                onImageUpload={handleImageUpload}
+              />
             </div>
             <div className="flex space-x-10 ">
               <div>
@@ -169,8 +184,15 @@ const AddProductModal = ({ show, onHide }) => {
               </Form.Group>
               <p className="text-xs text-red-400">{errors?.address?.message}</p>
             </div>
-            <Button variant="primary" type="submit">
-              submit
+            <Button variant="primary" type="submit" disabled={submitting}>
+              {submitting ? (
+                <>
+                  <Spinner animation="border" size="sm" />
+                  Submitting...
+                </>
+              ) : (
+                "Submit"
+              )}
             </Button>
           </form>
         </div>
