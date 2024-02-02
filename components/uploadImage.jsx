@@ -1,4 +1,3 @@
-// UploadImage.js
 import React from "react";
 
 const UploadImage = ({ register, onImageUpload }) => {
@@ -8,11 +7,11 @@ const UploadImage = ({ register, onImageUpload }) => {
       try {
         const data = new FormData();
         data.append("file", file);
-        data.append("upload_preset", "chat-app");
-        data.append("cloud_name", "piyushproj");
+        data.append("upload_preset", "aqtrvven");
+        data.append("cloud_name", "shiraanlio");
 
         const response = await fetch(
-          "https://api.cloudinary.com/v1_1/piyushproj/image/upload",
+          "https://api.cloudinary.com/v1_1/shiraanlio/image/upload",
           {
             method: "post",
             body: data,
