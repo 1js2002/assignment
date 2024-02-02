@@ -26,7 +26,7 @@ const SearchBar = ({ handleSearchChange }) => {
   const handleSearchClick = () => {
     if (isAnyFieldFilled()) {
       handleSearchChange(formData);
-      setError(null); // Clear the error when at least one field is filled
+      setError(null); 
     } else {
       setError("Please fill at least one field");
       console.log("Please fill at least one field");

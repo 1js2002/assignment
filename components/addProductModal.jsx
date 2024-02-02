@@ -13,10 +13,10 @@ import { Modal, Button, Spinner, Alert } from "react-bootstrap";
 import axios from "axios";
 import UploadImage from "./uploadImage";
 
+
 const AddProductModal = ({ show, onHide }) => {
   const [submitting, setSubmitting] = useState(false);
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
-  const [imageUploadError, setImageUploadError] = useState(null);
   const {
     register,
     handleSubmit,
@@ -83,7 +83,7 @@ const AddProductModal = ({ show, onHide }) => {
                     min={0}
                     placeholder="quanity"
                     {...register("quantity")}
-                    style={{ width: "150px" }} // Set the desired width here
+                    style={{ width: "150px" }}
                   />
                   <p className="text-xs text-red-400">
                     {errors?.quantity?.message}

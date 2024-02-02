@@ -22,7 +22,6 @@ export const GET = async (request) => {
     let productDetails;
 
     if (productQuery || sizeQuery || phoneQuery) {
-      // Handle search query with multiple fields
       const searchConditions = [];
 
       if (productQuery) {
@@ -49,11 +48,8 @@ export const GET = async (request) => {
       });
       console.log("productDetails:", productDetails);
     } else {
-      // Fetch all products
       productDetails = await product
         .find({})
-        // .skip(query.skip)
-        // .limit(query.take);
     }
 
     return new Response(JSON.stringify(productDetails), { status: 200 });

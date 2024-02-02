@@ -32,18 +32,18 @@ const LocationForm = ({ register, cityerrors, stateerrors, countryerrors }) => {
     setSelectedCountry(option);
     setSelectedCity(null);
     setSelectedState(null);
-    register("country", { value: option?.label }); // Register the selected country using the react-hook-form register function
+    register("country", { value: option?.label }); 
   };
 
   const handleSelectedState = (option) => {
     setSelectedState(option);
     setSelectedCity(null);
-    register("state", { value: option?.label }); // Register the selected state using the react-hook-form register function
+    register("state", { value: option?.label }); 
   };
 
   const handleSelectedCity = (option) => {
     setSelectedCity(option);
-    register("city", { value: option?.label }); // Register the selected city using the react-hook-form register function
+    register("city", { value: option?.label });
   };
 
   const getStateOptions = () => {
@@ -74,7 +74,6 @@ const LocationForm = ({ register, cityerrors, stateerrors, countryerrors }) => {
     }));
   };
 
-  // useEffect to register the initial values on component mount
   useEffect(() => {
     if (selectedCountry) {
       register("country", { value: selectedCountry?.value });

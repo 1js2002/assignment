@@ -7,7 +7,7 @@ const ProductTable = ({ data, isLoading, currentPage, postsPerPage }) => {
   const currentPosts = data.slice(startIndex, endIndex);
   return (
     <div className="flex flex-col ">
-      {isLoading ? ( // Render loading message if isLoading is true
+      {isLoading ? (  
         <p className="flex items-center justify-center ">Loading...</p>
       ) : (
         <Table className="table">
