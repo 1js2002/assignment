@@ -60,7 +60,7 @@ const AddProductModal = ({ show, onHide }) => {
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3  space-x-3 items-center flex">
-              <div className="flex w-1/2">
+              <div className="flex w-1/2 space-x-2">
                 <div>
                   <Form.Label className="fw-bold">Product Name:</Form.Label>
                   <Form.Control
@@ -83,7 +83,7 @@ const AddProductModal = ({ show, onHide }) => {
                     min={0}
                     placeholder="quanity"
                     {...register("quantity")}
-                    style={{ width: "100px" }} // Set the desired width here
+                    style={{ width: "150px" }} // Set the desired width here
                   />
                   <p className="text-xs text-red-400">
                     {errors?.quantity?.message}
@@ -97,7 +97,7 @@ const AddProductModal = ({ show, onHide }) => {
                     type="number"
                     placeholder="price"
                     {...register("price")}
-                    style={{ width: "100px" }}
+                    style={{ width: "150px" }}
                   />
                   <p className="text-xs text-red-400">
                     {errors?.price?.message}
@@ -105,10 +105,8 @@ const AddProductModal = ({ show, onHide }) => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-1/2 items-start space-x-1">
-              <Form.Label className="px-3  fw-bold flex items-start">
-                Product Image:
-              </Form.Label>
+            <div className=" w-1/2  mb-4 space-x-2">
+              <Form.Label className="fw-bold">Product Image</Form.Label>
               <UploadImage
                 register={register}
                 onImageUpload={handleImageUpload}
