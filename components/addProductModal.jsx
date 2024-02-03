@@ -18,12 +18,12 @@ const AddProductModal = () => {
 
   const handleClose = () => {
     setSubmitting(false);
-    setIsSubmitSuccessful(false);
     reset();
     setShow();
   };
   const handleShow = () => setShow(true);
   const [submitting, setSubmitting] = useState(false);
+  
   const {
     register,
     reset,
