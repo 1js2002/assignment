@@ -91,6 +91,7 @@ export default function Home() {
   }, [searchTerms.product || searchTerms.size || searchTerms.phone]);
   const totalPages = Math.ceil(allPosts.length / postsPerPage);
 
+  
   return (
     <section className="flex flex-col m-4">
       <h1>Product List</h1>
