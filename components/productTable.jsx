@@ -8,7 +8,7 @@ const ProductTable = ({ data, isLoading, currentPage, postsPerPage }) => {
   return (
     <div className="flex flex-col ">
       {isLoading ? (  
-        <p className="flex items-center justify-center ">Loading...</p>
+        <p className="flex items-center justify-center ">fetching data...</p>
       ) : (
         <Table className="table">
           <thead>

@@ -96,11 +96,10 @@ export default function Home() {
       <h1>Product List</h1>
       <div className="flex justify-between my-4">
         <SearchBar handleSearchChange={handleSearchChange} />
-        <Button variant="primary" onClick={handleShow}>
-          add product
-        </Button>
        
-        <AddProductModal show={show} onHide={handleClose} />
+       
+        <AddProductModal />
+        
       </div>
       <div className="h-[470px]">
         <ProductTable

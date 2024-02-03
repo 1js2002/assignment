@@ -5,11 +5,10 @@ export const validationSchema = Yup.object().shape({
     .required("Please provide the price.")
     .typeError("quantity must be a number")
     .min(0, "Too little")
-    .max(5000, "Very costly!"),
+    .max(100, "Very costly!"),
   price: Yup.number()
     .typeError("price must be a number")
-    .min(2)
-    .max(20)
+    .min(1)
     .required("Price is required"),
   brand: Yup.string()
     .oneOf(["ParkAvenue", "Arrow", "Reymond"], "Please select a brand")
